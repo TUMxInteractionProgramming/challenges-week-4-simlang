@@ -27,6 +27,10 @@ button, strong {
     text-transform: uppercase;
 }
 
+i {
+    font-size: 24px;
+}
+
 /* LAYOUT #5 #split */
 
 #channels {
@@ -95,6 +99,7 @@ h1 #channel-star {
     /* #6 #liking #filled  */
     position:absolute;
     right: 16px;
+    bottom: 20px;
 }
 
 /* CHANNELS LIST */
@@ -172,7 +177,7 @@ li.selected {
     border-bottom: 4px solid #3F51B5;
 }
 
-#tab-bar button img {
+#tab-bar button i {
     display: block;
     margin: 0 auto 4px auto;
 }

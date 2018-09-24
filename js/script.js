@@ -1,32 +1,40 @@
+var currentChannel;
+var currentLocation = {longitude: 48.264729, latitude: 11.671401, what3words: 'builder.eyelid.scam'};
+
 /* #6 start the #external #action and say hello */
 console.log("App is alive");
 
 /**
  * #6 #Switcher function for the #channels name in the right app bar
- * @param channelName Text which is set
+ * @param channel Channel which is set
  */
-function switchChannel(channelName) {
+function switchChannel(channel) {
     //Log the channel switch
-    console.log("Tuning in to channel", channelName);
+    console.log("Tuning in to channel", channel);
+
+    currentChannel = channel;
 
     //Write the new channel to the right app bar
-    document.getElementById('channel-name').innerHTML = channelName;
+    document.getElementById('channel-name').innerHTML = channel.name;
 
     //#6 change the #channel #location
-    document.getElementById('channel-location').innerHTML = 'by <a href="http://w3w.co/upgrading.never.helps" target="_blank"><strong>upgrading.never.helps</strong></a>';
+    document.getElementById('channel-location').innerHTML = 'by <a href="http://w3w.co/' + channel.createdBy + '" target="_blank"><strong>' + channel.createdBy + '</strong></a>';
 
     /* #6 #liking channels on #click */
-    $('#channel-star').attr('src', 'http://ip.lfe.mw.tum.de/sections/star-o.png');
+    $('#channel-star').attr('class', ((channel.starred) ? 'fas' : 'far') + ' fa-star')
 
     /* #6 #highlight the selected #channel.
        This is inefficient (jQuery has to search all channel list items), but we'll change it later on */
     $('#channels li').removeClass('selected');
-    $('#channels li:contains(' + channelName + ')').addClass('selected');
+    $('#channels li:contains(' + channel.name + ')').addClass('selected');
 }
 
 /* #6 #liking a channel on #click */
 function star() {
-    $('#channel-star').attr('src', 'http://ip.lfe.mw.tum.de/sections/star.png');
+    currentChannel.starred = !currentChannel.starred;
+    var startype = currentChannel.starred ? 'fas fa-star' : 'far fa-star';
+    $('#channels .selected .fa-star').attr('class', startype);
+    $('#channel-star').attr('class', startype);
 }
 
 /**
