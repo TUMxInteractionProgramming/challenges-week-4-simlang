@@ -59,3 +59,48 @@ function toggleEmojis() {
     /* $('#emojis').show(); // #show */
     $('#emojis').toggle(); // #toggle
 }
+
+//Message methods
+
+function sendMessage(text) {
+    var newMessage = new Message(text);
+    console.log(newMessage);
+
+    var newElement = $('<div>');
+    newElement.addClass('message');
+
+    if(newMessage.own)
+        newElement.addClass('own');
+
+    newElement.html(createMessageObject(newMessage));
+    
+    $('#messages').append(newElement);
+
+    $('#messages').scrollTop($('#messages').height());
+    $('#message-field').val('');
+}
+
+function createMessageObject(messageObject) {
+    var expiresIn = Math.round((((messageObject.expiresOn - Date.now()) % 86400000) % 3600000) / 60000);
+    
+
+    var messageElement = 
+    //'<div class="message">' +
+    '<h3><a href="' + messageObject.createdBy + '" target="_blank"><strong>' + messageObject.createdBy + '</strong></a>' +
+        messageObject.createdOn.toDateString() + ', ' + messageObject.createdOn.toTimeString().substring(0, 5) + '<em>' + expiresIn + ' min. left</em></h3>' +
+    '<p>' + messageObject.text + '</p>' + 
+    '<button>+5 min.</button>';
+    //'</div>';
+
+    return messageElement;
+}
+
+function Message(text) {
+    this.createdBy = currentLocation.what3words;
+    this.longitude = currentLocation.longitude;
+    this.latitude = currentLocation.latitude;
+    this.createdOn = new Date(Date.now());
+    this.expiresOn = new Date(Date.now() + 900000); //900_000 millis are 15 mins
+    this.text = text;
+    this.own = true;
+}

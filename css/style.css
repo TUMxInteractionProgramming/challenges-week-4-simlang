@@ -27,10 +27,6 @@ button, strong {
     text-transform: uppercase;
 }
 
-i {
-    font-size: 24px;
-}
-
 /* LAYOUT #5 #split */
 
 #channels {
@@ -132,10 +128,18 @@ li .channel-meta {
     position: absolute;
     right: 16px;
     top: 12px;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
 }
 
-li img {
-    vertical-align: middle;
+.channel-meta span {
+    font-size: small;
+    background-color: #3F51B5;
+    color: white;
+    margin: auto 2px;
+    padding: 2px;
+    border-radius: 2px;
 }
 
 li.selected {
@@ -216,6 +220,13 @@ li.selected {
     display: none;
 }
 
+#message-field {
+    border: none;
+    font-size: medium;
+    width: 100%;
+    margin: 16px;
+}
+
 /* MESSAGES */
 
 .message {
@@ -274,4 +285,8 @@ li.selected {
 
 .message.own {
     margin-left: 17.5%;
+}
+
+i {
+    font-size: 24px;
 }
